@@ -13,8 +13,9 @@ class SampleItemDetailsView extends StatelessWidget {
         title: const Text('Item Details'),
       ),
       body: const Center(
-        child: Text('More Information Here'),
+        child: Text('More Information Here', style: TextStyle(color: Colors.white)), // Changed to white text
       ),
     );
   }
 }
+
