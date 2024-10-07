@@ -56,7 +56,18 @@ class MyApp extends StatelessWidget {
           // Define a light and dark color theme. Then, read the user's
           // preferred ThemeMode (light, dark, or system default) from the
           // SettingsController to display the correct theme.
-          theme: ThemeData(),
+          theme: ThemeData(
+            scaffoldBackgroundColor: const Color(0xFF000000), // Black Background
+            primaryColor: const Color(0xFFFFFFFF), // White for primary color
+            appBarTheme: const AppBarTheme(
+              backgroundColor: Color(0xFF000000), // Black AppBar
+              foregroundColor: Color(0xFFFFFFFF), // White text in AppBar
+            ),
+            textTheme: const TextTheme(
+              bodyText1: TextStyle(color: Color(0xFFFFFFFF)), // White text
+              bodyText2: TextStyle(color: Color(0xFFFFFFFF)), // White text
+            ),
+          ),
           darkTheme: ThemeData.dark(),
           themeMode: settingsController.themeMode,
 
@@ -83,3 +94,4 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
