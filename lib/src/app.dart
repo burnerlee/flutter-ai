@@ -6,6 +6,7 @@ import 'sample_feature/sample_item_details_view.dart';
 import 'sample_feature/sample_item_list_view.dart';
 import 'settings/settings_controller.dart';
 import 'settings/settings_view.dart';
+import 'constants.dart';
 
 /// The Widget that configures your application.
 class MyApp extends StatelessWidget {
@@ -56,7 +57,23 @@ class MyApp extends StatelessWidget {
           // Define a light and dark color theme. Then, read the user's
           // preferred ThemeMode (light, dark, or system default) from the
           // SettingsController to display the correct theme.
-          theme: ThemeData(),
+          theme: ThemeData(
+            scaffoldBackgroundColor: AppColors.background,
+            primaryColor: AppColors.primary,
+            accentColor: AppColors.secondary,
+            textTheme: TextTheme(
+              bodyText1: TextStyle(color: AppColors.primary),
+              bodyText2: TextStyle(color: AppColors.primary),
+            ),
+            appBarTheme: AppBarTheme(
+              backgroundColor: AppColors.background,
+              foregroundColor: AppColors.primary,
+            ),
+            buttonTheme: ButtonThemeData(
+              buttonColor: AppColors.secondary,
+              textTheme: ButtonTextTheme.primary,
+            ),
+          ),
           darkTheme: ThemeData.dark(),
           themeMode: settingsController.themeMode,
 
