@@ -10,22 +10,41 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:your_app/src/sample_feature/sample_item_list_view.dart';
+import 'package:your_app/src/sample_feature/sample_item.dart';
 
 void main() {
-  group('MyWidget', () {
-    testWidgets('should display a string of text', (WidgetTester tester) async {
-      // Define a Widget
-      const myWidget = MaterialApp(
-        home: Scaffold(
-          body: Text('Hello'),
-        ),
-      );
+  group('Home Screen Tests', () {
+    testWidgets('should display featured mangas section', (WidgetTester tester) async {
+      await tester.pumpWidget(MaterialApp(home: SampleItemListView()));
 
-      // Build myWidget and trigger a frame.
-      await tester.pumpWidget(myWidget);
+      expect(find.text('Featured Mangas'), findsOneWidget);
+    });
 
-      // Verify myWidget shows some text
-      expect(find.byType(Text), findsOneWidget);
+    testWidgets('should display categories section', (WidgetTester tester) async {
+      await tester.pumpWidget(MaterialApp(home: SampleItemListView()));
+
+      expect(find.text('Categories'), findsOneWidget);
+    });
+
+    testWidgets('should display list of mangas', (WidgetTester tester) async {
+      await tester.pumpWidget(MaterialApp(home: SampleItemListView()));
+
+      expect(find.byType(MangaCard), findsNWidgets(3));
+    });
+
+    testWidgets('should navigate to details on manga tap', (WidgetTester tester) async {
+      await tester.pumpWidget(MaterialApp(
+        home: SampleItemListView(),
+        routes: {
+          '/details': (context) => Scaffold(body: Text('Details Page')),
+        },
+      ));
+
+      await tester.tap(find.byType(MangaCard).first);
+      await tester.pumpAndSettle();
+
+      expect(find.text('Details Page'), findsOneWidget);
     });
   });
 }
