@@ -7,6 +7,13 @@ import 'sample_feature/sample_item_list_view.dart';
 import 'settings/settings_controller.dart';
 import 'settings/settings_view.dart';
 
+// Define color variables
+const Color kPrimaryColor = Colors.white;
+const Color kAccentColor = Colors.blueAccent;
+const Color kTextColor = Colors.white;
+const Color kTextSecondaryColor = Colors.white70;
+const Color kAppBarColor = Colors.black;
+
 /// The Widget that configures your application.
 class MyApp extends StatelessWidget {
   const MyApp({
@@ -56,7 +63,28 @@ class MyApp extends StatelessWidget {
           // Define a light and dark color theme. Then, read the user's
           // preferred ThemeMode (light, dark, or system default) from the
           // SettingsController to display the correct theme.
-          theme: ThemeData(),
+          theme: ThemeData(
+            scaffoldBackgroundColor: Colors.black, // Set background color to black
+            primaryColor: kPrimaryColor, // Set primary color to white for contrast
+            accentColor: kAccentColor, // Accent color for highlights
+            textTheme: TextTheme(
+              bodyText1: TextStyle(color: kTextColor),
+              bodyText2: TextStyle(color: kTextSecondaryColor),
+              headline1: TextStyle(color: kTextColor),
+              headline2: TextStyle(color: kTextSecondaryColor),
+            ),
+            appBarTheme: AppBarTheme(
+              color: kAppBarColor,
+              iconTheme: IconThemeData(color: kPrimaryColor),
+              textTheme: TextTheme(
+                headline6: TextStyle(color: kPrimaryColor, fontSize: 20),
+              ),
+            ),
+            buttonTheme: ButtonThemeData(
+              buttonColor: kAccentColor,
+              textTheme: ButtonTextTheme.primary,
+            ),
+          ),
           darkTheme: ThemeData.dark(),
           themeMode: settingsController.themeMode,
 
