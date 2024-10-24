@@ -7,6 +7,17 @@ import 'sample_feature/sample_item_list_view.dart';
 import 'settings/settings_controller.dart';
 import 'settings/settings_view.dart';
 
+// Define color constants
+const Color lightPrimaryColor = Colors.blue;
+const Color lightAccentColor = Colors.blueAccent;
+const Color lightTextColor = Colors.black;
+const Color lightTextSecondaryColor = Colors.black54;
+
+const Color darkPrimaryColor = Colors.white;
+const Color darkAccentColor = Colors.blueAccent;
+const Color darkTextColor = Colors.white;
+const Color darkTextSecondaryColor = Colors.white70;
+
 /// The Widget that configures your application.
 class MyApp extends StatelessWidget {
   const MyApp({
@@ -56,8 +67,24 @@ class MyApp extends StatelessWidget {
           // Define a light and dark color theme. Then, read the user's
           // preferred ThemeMode (light, dark, or system default) from the
           // SettingsController to display the correct theme.
-          theme: ThemeData(),
-          darkTheme: ThemeData.dark(),
+          theme: ThemeData(
+            scaffoldBackgroundColor: Colors.white,
+            primaryColor: lightPrimaryColor,
+            accentColor: lightAccentColor,
+            textTheme: TextTheme(
+              bodyText1: TextStyle(color: lightTextColor),
+              bodyText2: TextStyle(color: lightTextSecondaryColor),
+            ),
+          ),
+          darkTheme: ThemeData.dark().copyWith(
+            scaffoldBackgroundColor: Colors.black,
+            primaryColor: darkPrimaryColor,
+            accentColor: darkAccentColor,
+            textTheme: TextTheme(
+              bodyText1: TextStyle(color: darkTextColor),
+              bodyText2: TextStyle(color: darkTextSecondaryColor),
+            ),
+          ),
           themeMode: settingsController.themeMode,
 
           // Define a function to handle named routes in order to support
