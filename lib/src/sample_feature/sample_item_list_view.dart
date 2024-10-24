@@ -19,7 +19,7 @@ class SampleItemListView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Sample Items'),
+        title: const Text('Manga Gallery'),
         actions: [
           IconButton(
             icon: const Icon(Icons.settings),
@@ -32,37 +32,110 @@ class SampleItemListView extends StatelessWidget {
           ),
         ],
       ),
+      body: Column(
+        children: [
+          // Featured Mangas Section
+          FeaturedMangasWidget(),
+          // Categories Section
+          CategoriesWidget(),
+          // Recent Additions Section
+          Expanded(
+            child: ListView.builder(
+              restorationId: 'sampleItemListView',
+              itemCount: items.length,
+              itemBuilder: (BuildContext context, int index) {
+                final item = items[index];
 
-      // To work with lists that may contain a large number of items, it’s best
-      // to use the ListView.builder constructor.
-      //
-      // In contrast to the default ListView constructor, which requires
-      // building all Widgets up front, the ListView.builder constructor lazily
-      // builds Widgets as they’re scrolled into view.
-      body: ListView.builder(
-        // Providing a restorationId allows the ListView to restore the
-        // scroll position when a user leaves and returns to the app after it
-        // has been killed while running in the background.
-        restorationId: 'sampleItemListView',
-        itemCount: items.length,
-        itemBuilder: (BuildContext context, int index) {
-          final item = items[index];
-
-          return ListTile(
-            title: Text('SampleItem ${item.id}'),
-            leading: const CircleAvatar(
-              // Display the Flutter Logo image asset.
-              foregroundImage: AssetImage('assets/images/flutter_logo.png'),
+                return MangaCard(item: item);
+              },
             ),
-            onTap: () {
-              // Navigate to the details page. If the user leaves and returns to
-              // the app after it has been killed while running in the
-              // background, the navigation stack is restored.
-              Navigator.restorablePushNamed(
-                context,
-                SampleItemDetailsView.routeName,
-              );
-            }
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class FeaturedMangasWidget extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 200,
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          colors: [Colors.purpleAccent, Colors.deepPurple],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+        ),
+      ),
+      child: Center(
+        child: Text(
+          'Featured Mangas',
+          style: TextStyle(
+            fontSize: 24,
+            fontWeight: FontWeight.bold,
+            color: Colors.white,
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class CategoriesWidget extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 100,
+      decoration: BoxDecoration(
+        color: Colors.grey[300],
+        border: Border(
+          bottom: BorderSide(color: Colors.grey[400]!, width: 1),
+        ),
+      ),
+      child: Center(
+        child: Text(
+          'Categories',
+          style: TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+            color: Colors.black87,
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class MangaCard extends StatelessWidget {
+  final SampleItem item;
+
+  const MangaCard({required this.item});
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      margin: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+      elevation: 4,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: ListTile(
+        title: Text(
+          'SampleItem ${item.id}',
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
+        leading: const CircleAvatar(
+          // Display the Flutter Logo image asset.
+          foregroundImage: AssetImage('assets/images/flutter_logo.png'),
+        ),
+        onTap: () {
+          // Navigate to the details page. If the user leaves and returns to
+          // the app after it has been killed while running in the
+          // background, the navigation stack is restored.
+          Navigator.restorablePushNamed(
+            context,
+            SampleItemDetailsView.routeName,
           );
         },
       ),
