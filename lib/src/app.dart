@@ -56,7 +56,30 @@ class MyApp extends StatelessWidget {
           // Define a light and dark color theme. Then, read the user's
           // preferred ThemeMode (light, dark, or system default) from the
           // SettingsController to display the correct theme.
-          theme: ThemeData(),
+          theme: ThemeData(
+            scaffoldBackgroundColor: Colors.black, // Set background color to black
+            primaryColor: Colors.white, // Set primary color to white for contrast
+            textTheme: const TextTheme(
+              bodyText1: TextStyle(color: Colors.white),
+              bodyText2: TextStyle(color: Colors.white),
+            ),
+            iconTheme: const IconThemeData(color: Colors.white),
+            buttonTheme: const ButtonThemeData(
+              buttonColor: Colors.white, // Button background color
+              textTheme: ButtonTextTheme.primary, // Button text color
+            ),
+            elevatedButtonTheme: ElevatedButtonThemeData(
+              style: ElevatedButton.styleFrom(
+                primary: Colors.white, // Button background color
+                onPrimary: Colors.black, // Button text color
+              ),
+            ),
+            dialogTheme: const DialogTheme(
+              backgroundColor: Colors.black,
+              titleTextStyle: TextStyle(color: Colors.white),
+              contentTextStyle: TextStyle(color: Colors.white),
+            ),
+          ),
           darkTheme: ThemeData.dark(),
           themeMode: settingsController.themeMode,
 
